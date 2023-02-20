@@ -1,0 +1,83 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tdc: <http://thedatachefs.com/dtc> .
+
+# Description of properties
+tdc:lahmanPlayerID rdfs:label "player id in lahman database" .
+tdc:birthYear rdfs:label "year of birth" .
+tdc:birthYear skos:altLabel "was born on year" .
+tdc:birthDate rdfs:label "date of birth" .
+tdc:birthDate skos:altLabel "was born on" .
+tdc:birthMonth rdfs:label "month of birth" .
+tdc:birthMonth skos:altLabel "was born on month".
+tdc:birthDay rdfs:label "day of birth" .
+tdc:birthDay skos:altLabel "was born on day".
+tdc:birthCountry rdfs:label "country of birth" .
+tdc:birthCountry skos:altLabel "was born in country".
+tdc:birthState rdfs:label "state of birth" .
+tdc:birthState skos:altLabel "was born in state".
+tdc:birthCity rdfs:label "city of birth" .
+tdc:birthCity skos:altLabel "was born in city".
+tdc:nameFirst rdfs:label "first name" .
+tdc:givenName rdfs:label "given name" .
+tdc:countryOfCitizenship rdfs:label "country of citizenship" .
+tdc:educatedAt rdfs:label "educated at school or college" .
+tdc:educatedAt skos:altLabel "went to school or college" .
+tdc:image rdfs:label "image name" .
+tdc:wikiPlayerID rdfs:label "wikidata entity url" .
+tdc:nameLast rdfs:label "last name" .
+tdc:weight rdfs:label "weight" .
+tdc:height rdfs:label "height" .
+tdc:bats rdfs:label "batting hand" .
+tdc:throws rdfs:label "throwing hand" .
+tdc:debut rdfs:label "debut game date" .
+tdc:finalGame rdfs:label "final game date" .
+tdc:retroPlayerID rdfs:label "retrosheet player id" .
+tdc:baseballReferenceRetroID rdfs:label "baseball reference player id" .
+tdc:BattingStatPlayer rdfs:label "baseball player" .
+tdc:BattingStatYear rdfs:label "on year" .
+tdc:GamesPlayed rdfs:label "games played" .
+tdc:GamesPlayed skos:altLabel "played games" .
+
+# Biographical
+tdc:Q17489773 tdc:birthDate "1994-03-29";
+tdc:birthYear "1994";
+tdc:lahmanPlayerID "olsonma02";
+tdc:birthCity "Atlanta";
+tdc:birthState "GA";
+tdc:birthCountry "USA";
+tdc:birthDay "29";
+tdc:birthMonth "3";
+tdc:nameFirst "Matt";
+rdfs:label "Matt Olson";
+tdc:givenName "Matt";
+tdc:countryOfCitizenship "United States of America";
+tdc:educatedAt "Parkview High School";
+tdc:image "Matt Olson.jpg";
+tdc:wikiPlayerID "http://www.wikidata.org/entity/Q17489773/";
+tdc:nameLast "Olson";
+tdc:weight "225";
+tdc:height "77";
+tdc:bats "L";
+tdc:throws "R";
+tdc:debut "2016-09-12";
+tdc:finalGame "2021-10-03";
+tdc:retroPlayerID "olsom001";
+tdc:baseballReferenceRetroID "olsonma02" .
+
+# Stats
+tdc:BattingStat01 tdc:BattingStatPlayer tdc:Q17489773;
+tdc:BattingStatYear 2018;
+tdc:GamesPlayed 162 . 
+tdc:BattingStat01 tdc:BattingStatPlayer tdc:Q17489773;
+tdc:BattingStatYear 2019;
+tdc:GamesPlayed 127 . 
+tdc:BattingStat01 tdc:BattingStatPlayer tdc:Q17489773;
+tdc:BattingStatYear 2020;
+tdc:GamesPlayed 60 . 
+tdc:BattingStat01 tdc:BattingStatPlayer tdc:Q17489773;
+tdc:BattingStatYear 2021;
+tdc:GamesPlayed 156 . 

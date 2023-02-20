@@ -1,0 +1,64 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tdc: <http://thedatachefs.com/dtc> .
+
+tdc:lahmanPlayerID rdfs:label "player id in lahman database" .
+tdc:birthYear rdfs:label "year of birth" .
+tdc:birthYear skos:altLabel "was born on year" .
+tdc:birthDate rdfs:label "date of birth" .
+tdc:birthDate skos:altLabel "was born on" .
+tdc:birthMonth rdfs:label "month of birth" .
+tdc:birthMonth skos:altLabel "was born on month".
+tdc:birthDay rdfs:label "day of birth" .
+tdc:birthDay skos:altLabel "was born on day".
+tdc:birthCountry rdfs:label "country of birth" .
+tdc:birthCountry skos:altLabel "was born in country".
+tdc:birthState rdfs:label "state of birth" .
+tdc:birthState skos:altLabel "was born in state".
+tdc:birthCity rdfs:label "city of birth" .
+tdc:birthCity skos:altLabel "was born in city".
+tdc:nameFirst rdfs:label "first name" .
+tdc:givenName rdfs:label "given name" .
+tdc:countryOfCitizenship rdfs:label "country of citizenship" .
+tdc:educatedAt rdfs:label "educated at school or college" .
+tdc:educatedAt skos:altLabel "went to school or college" .
+tdc:image rdfs:label "image name" .
+tdc:wikiPlayerID rdfs:label "wikidata entity url" .
+tdc:nameLast rdfs:label "last name" .
+tdc:weight rdfs:label "weight" .
+tdc:height rdfs:label "height" .
+tdc:bats rdfs:label "batting hand" .
+tdc:throws rdfs:label "throwing hand" .
+tdc:debut rdfs:label "debut game date" .
+tdc:finalGame rdfs:label "final game date" .
+tdc:retroPlayerID rdfs:label "retrosheet player id" .
+tdc:baseballReferenceRetroID rdfs:label "baseball reference player id" .
+
+
+tdc:Q1208089 tdc:lahmanPlayerID "aardsda01";
+tdc:birthYear "1981";
+tdc:birthDate "1981-12-27";
+tdc:birthMonth "12";
+tdc:birthDay "27";
+tdc:birthCountry "USA";
+tdc:birthState "CO";
+tdc:birthCity "Denver";
+tdc:nameFirst "David";
+rdfs:label "David Aardsma";
+tdc:givenName "David";
+tdc:countryOfCitizenship "United States of America";
+tdc:educatedAt "Rice University";
+tdc:image "David Aardsma on July 25, 2013.jpg";
+tdc:wikiPlayerID "http://www.wikidata.org/entity/Q1208089/";
+tdc:nameLast "Aardsma";
+tdc:weight "215";
+tdc:height "75";
+tdc:bats "R";
+tdc:throws "R";
+tdc:debut "2004-04-06";
+tdc:finalGame "2015-08-23";
+tdc:retroPlayerID "aardd001";
+tdc:baseballReferenceRetroID "aardsda01" .
