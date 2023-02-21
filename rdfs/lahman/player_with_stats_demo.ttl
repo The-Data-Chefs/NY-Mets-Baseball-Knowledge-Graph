@@ -24,8 +24,8 @@ tdc:birthCity skos:altLabel "was born in city".
 tdc:nameFirst rdfs:label "first name" .
 tdc:givenName rdfs:label "given name" .
 tdc:countryOfCitizenship rdfs:label "country of citizenship" .
-tdc:educatedAt rdfs:label "educated at school or college" .
-tdc:educatedAt skos:altLabel "went to school or college" .
+tdc:educatedAt rdfs:label "educated at school or college or university" .
+tdc:educatedAt skos:altLabel "went to school or college or university" .
 tdc:image rdfs:label "image name" .
 tdc:wikiPlayerID rdfs:label "wikidata entity url" .
 tdc:nameLast rdfs:label "last name" .
