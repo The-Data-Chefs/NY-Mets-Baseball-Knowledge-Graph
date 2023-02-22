@@ -1,13 +1,11 @@
 import pandas as pd
-from rdflib import Graph, Literal, URIRef
+from rdflib import Graph, Literal, URIRef, Namespace
 from rdflib.namespace import RDF, RDFS, XSD
 from urllib.parse import quote
 
 # Define namespaces
-NS = {
-    "skos": URIRef("http://www.w3.org/2004/02/skos/core#"),
-    "tdc": URIRef("http://thedatachefs.com/tdc/0.1/"),
-}
+tdc = Namespace("http://thedatachefs.com/tdc/0.1/")
+skos = Namespace("http://www.w3.org/2004/02/skos/core#")
 
 
 # Read input CS files into pandas dataframes
@@ -38,47 +36,47 @@ met_players.loc[~mask, 'alive'] = False
 
 # Initialize graph, class and properties
 g = Graph()
-g.bind('tdc', NS['tdc'])
-g.bind('skos', NS['skos'])
+g.bind('tdc', tdc)
+g.bind('skos', skos)
 
-BaseballPlayer = URIRef(f"{NS['tdc']}BaseballPlayer")
+BaseballPlayer = tdc.BaseballPlayer
 g.add((BaseballPlayer, RDF.type, RDFS.Class))
 g.add((BaseballPlayer, RDFS.label, Literal('Baseball Player')))
 
 properties = [
-    {'column': 'birthDate', 'name': 'dateOfBirth', 'type':XSD.date, 'label': 'date of birth', 'altLabel': 'born on'},
-    {'column': 'date of death', 'name': 'dateOfDeath', 'type':XSD.date, 'label': 'date of death', 'altLabel': 'died on'},
-    {'column': 'place of birth', 'name': 'placeOfBirth', 'type':XSD.string, 'label': 'place of birth', 'altLabel': 'born at'},
-    {'column': 'place of death', 'name': 'placeOfDeath', 'type':XSD.string, 'label': 'place of death', 'altLabel': 'died at'},
-    {'column': 'place of burial', 'name': 'placeOfBurial', 'type':XSD.string, 'label': 'place of burial', 'altLabel': 'buried at'},
-    {'column': 'country of citizenship', 'name': 'country', 'type':XSD.string, 'label': 'country of citizenship', 'altLabel': 'country'},
-    {'column': 'educated at', 'name': 'educatedAt', 'type':XSD.string, 'label': 'educated at', 'altLabel': 'went to'},
-    {'column': 'given name', 'name': 'givenName', 'type':XSD.string, 'label': 'given name', 'altLabel': 'name given'},
-    {'column': 'weight', 'name': 'weight', 'type':XSD.integer, 'label': 'weight', 'altLabel': 'weighs'},
-    {'column': 'height', 'name': 'height', 'type':XSD.integer, 'label': 'height', 'altLabel': 'tall'},
-    {'column': 'bats', 'name': 'battingHand', 'type':XSD.string, 'label': 'batting hand', 'altLabel': 'bats with'},
-    {'column': 'throws', 'name': 'throwingHand', 'type':XSD.string, 'label': 'throwing hand', 'altLabel': 'throws with'},
-    {'column': 'debut', 'name': 'debut', 'type':XSD.date, 'label': 'debut', 'altLabel': 'debut game'},
-    {'column': 'finalGame', 'name': 'finalGame', 'type':XSD.date, 'label': 'last game', 'altLabel': 'last performance'},
-    {'column': 'image', 'name': 'image', 'type':XSD.anyURI, 'label': 'image', 'altLabel': 'photo'},
-    {'column': 'alive', 'name': 'alive', 'type':XSD.boolean, 'label': 'alive', 'altLabel': 'not dead'},
+    {'column': 'birthDate', 'name': tdc.dateOfBirth, 'type':XSD.date, 'label': 'date of birth', 'altLabel': 'born on'},
+    {'column': 'date of death', 'name': tdc.dateOfDeath, 'type':XSD.date, 'label': 'date of death', 'altLabel': 'died on'},
+    {'column': 'place of birth', 'name': tdc.placeOfBirth, 'type':XSD.string, 'label': 'place of birth', 'altLabel': 'born at'},
+    {'column': 'place of death', 'name': tdc.placeOfDeath, 'type':XSD.string, 'label': 'place of death', 'altLabel': 'died at'},
+    {'column': 'place of burial', 'name': tdc.placeOfBurial, 'type':XSD.string, 'label': 'place of burial', 'altLabel': 'buried at'},
+    {'column': 'country of citizenship', 'name': tdc.country, 'type':XSD.string, 'label': 'country of citizenship', 'altLabel': 'country'},
+    {'column': 'educated at', 'name': tdc.educatedAt, 'type':XSD.string, 'label': 'educated at', 'altLabel': 'went to'},
+    {'column': 'given name', 'name': tdc.givenName, 'type':XSD.string, 'label': 'given name', 'altLabel': 'name given'},
+    {'column': 'weight', 'name': tdc.weight, 'type':XSD.integer, 'label': 'weight', 'altLabel': 'weighs'},
+    {'column': 'height', 'name': tdc.height, 'type':XSD.integer, 'label': 'height', 'altLabel': 'tall'},
+    {'column': 'bats', 'name': tdc.battingHand, 'type':XSD.string, 'label': 'batting hand', 'altLabel': 'bats with'},
+    {'column': 'throws', 'name': tdc.throwingHand, 'type':XSD.string, 'label': 'throwing hand', 'altLabel': 'throws with'},
+    {'column': 'debut', 'name': tdc.debut, 'type':XSD.date, 'label': 'debut', 'altLabel': 'debut game'},
+    {'column': 'finalGame', 'name': tdc.finalGame, 'type':XSD.date, 'label': 'last game', 'altLabel': 'last performance'},
+    {'column': 'image', 'name': tdc.image, 'type':XSD.anyURI, 'label': 'image', 'altLabel': 'photo'},
+    {'column': 'alive', 'name': tdc.alive, 'type':XSD.boolean, 'label': 'alive', 'altLabel': 'not dead'},
 ]
 
 for p in properties:
-    g.add((URIRef(f"{NS['tdc']}{p['name']}"), RDF.type, RDF.Property))
-    g.add((URIRef(f"{NS['tdc']}{p['name']}"), RDFS.domain, BaseballPlayer))
-    g.add((URIRef(f"{NS['tdc']}{p['name']}"), RDFS.range, p['type']))
-    g.add((URIRef(f"{NS['tdc']}{p['name']}"), RDFS.label, Literal(p['label'])))
-    g.add((URIRef(f"{NS['tdc']}{p['name']}"), URIRef(f"{NS['skos']}altLabel"), Literal(p['altLabel'])))
+    g.add((p['name'], RDF.type, RDF.Property))
+    g.add((p['name'], RDFS.domain, BaseballPlayer))
+    g.add((p['name'], RDFS.range, p['type']))
+    g.add((p['name'], RDFS.label, Literal(p['label'])))
+    g.add((p['name'], skos.altLabel, Literal(p['altLabel'])))
         
 
 # Add data from pandas dataframe to rdflib graph
 for index, row in met_players.iterrows():
-    subj = URIRef(f"{NS['tdc']}{row['playerID']}")
+    subj = URIRef(f"{tdc}{row['playerID']}")
     g.add((subj, RDF.type, BaseballPlayer))
     for p in properties:
-        pred = URIRef(f"{NS['tdc']}{p['name']}")
-        if p['name'] == 'image':
+        pred = p['name']
+        if p['column'] == 'image':
             obj = URIRef(quote(f"https://commons.wikimedia.org/wiki/Special:FilePath/{row[p['column']]}").replace('%3A', ':'))
         else:
             obj = Literal(row[p['column']], datatype=p['type'])
