@@ -5,20 +5,33 @@ A New York Mets Major League Baseball Knowlege Graph
     .gitignore
     requirements.txt
     lahman_to_turtle.py
+    from_wiki.py
     - data/
         - lahman/
             *.csv
     - rdfs/
-        - lahman/
+        - output.ttl
+        - lahman/       # old ttls
             - *.ttl
-    - utils/
-    
+    - wikitexts/
+        - *.txt
 
-# Usage
-    virtualenv venv 
-    source venv/bin/activate
-    pip install -r requirements.py
-    python lahman_to_turtle.py
+# Setup
+```
+virtualenv venv 
+source venv/bin/activate
+pip install -r requirements.py
+```
+
+# Usage 1: Lahman database to RDF Turtle format
+```
+python lahman_to_turtle.py
+```
+
+# Usage 2: get text from wikipedia title. (eg. Barry_Bonds for https://en.wikipedia.org/wiki/Barry_Bonds )
+```
+python from_wiki.py <wiki_title>
+```
 
 # Data Source
     Lahman Database with additional information obtained from reconciling with WikiData
