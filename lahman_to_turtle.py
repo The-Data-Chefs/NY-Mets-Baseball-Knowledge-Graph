@@ -8,7 +8,7 @@ tdc = Namespace("http://thedatachefs.com/tdc/0.1/")
 skos = Namespace("http://www.w3.org/2004/02/skos/core#")
 
 
-# Read input CS files into pandas dataframes
+# Read input CSV files into pandas dataframes
 players = pd.read_csv("data/player_with_wiki.csv") # with more information from WikiData from openrefine
 batting = pd.read_csv("data/lahman/Batting.csv")
 fielding = pd.read_csv("data/lahman/Fielding.csv")
