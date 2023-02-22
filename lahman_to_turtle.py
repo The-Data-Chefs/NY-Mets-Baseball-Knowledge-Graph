@@ -74,6 +74,8 @@ for p in properties:
 for index, row in met_players.iterrows():
     subj = URIRef(f"{tdc}{row['playerID']}")
     g.add((subj, RDF.type, BaseballPlayer))
+    g.add((subj, RDFS.label, Literal(row['nameFull'])))
+    g.add((subj, skos.altLabel, Literal(row['given name'])))
     for p in properties:
         pred = p['name']
         if p['column'] == 'image':
