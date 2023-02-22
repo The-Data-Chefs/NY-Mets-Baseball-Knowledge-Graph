@@ -1,6 +1,7 @@
 import pandas as pd
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, RDFS, XSD
+from urllib.parse import quote
 
 # Define namespaces
 NS = {
@@ -24,8 +25,8 @@ mets_player_ids = list(set(mets_players_id_batting).union(set(mets_players_id_fi
 mets_players = players[players.playerID.isin(mets_player_ids)]
 
 # expand batting hand and throwing hand columns
-met_players = mets_players.replace({'bats': {'R': 'Right', 'L': 'Left', 'B': 'Both'}})
-met_players = mets_players.replace({'throws': {'R': 'Right', 'L': 'Left', 'B': 'Both'}})
+met_players = mets_players.replace({'bats': {'R': 'Right', 'L': 'Left', 'B': 'Both'}, 
+                                    'throws': {'R': 'Right', 'L': 'Left', 'B': 'Both'}})
 
 # Add a boolean field called alive
 mask = met_players['date of death'].isna()
@@ -53,8 +54,8 @@ properties = [
     {'column': 'country of citizenship', 'name': 'country', 'type':XSD.string, 'label': 'country of citizenship', 'altLabel': 'country'},
     {'column': 'educated at', 'name': 'educatedAt', 'type':XSD.string, 'label': 'educated at', 'altLabel': 'went to'},
     {'column': 'given name', 'name': 'givenName', 'type':XSD.string, 'label': 'given name', 'altLabel': 'name given'},
-    {'column': 'weight', 'name': 'weight', 'type':XSD.int, 'label': 'weight', 'altLabel': 'weighs'},
-    {'column': 'height', 'name': 'height', 'type':XSD.int, 'label': 'height', 'altLabel': 'tall'},
+    {'column': 'weight', 'name': 'weight', 'type':XSD.integer, 'label': 'weight', 'altLabel': 'weighs'},
+    {'column': 'height', 'name': 'height', 'type':XSD.integer, 'label': 'height', 'altLabel': 'tall'},
     {'column': 'bats', 'name': 'battingHand', 'type':XSD.string, 'label': 'batting hand', 'altLabel': 'bats with'},
     {'column': 'throws', 'name': 'throwingHand', 'type':XSD.string, 'label': 'throwing hand', 'altLabel': 'throws with'},
     {'column': 'debut', 'name': 'debut', 'type':XSD.date, 'label': 'debut', 'altLabel': 'debut game'},
@@ -77,8 +78,16 @@ for index, row in met_players.iterrows():
     g.add((subj, RDF.type, BaseballPlayer))
     for p in properties:
         pred = URIRef(f"{NS['tdc']}{p['name']}")
-        obj = Literal(row[p['column']], datatype=p['type'])
+        if p['name'] == 'image':
+            obj = URIRef(quote(f"https://commons.wikimedia.org/wiki/Special:FilePath/{row[p['column']]}").replace('%3A', ':'))
+        else:
+            obj = Literal(row[p['column']], datatype=p['type'])
         g.add((subj, pred, obj))
 
 # Serialize graph to Turtle format and save to file
-g.serialize(destination="rdfs/output.ttl", format="turtle")
+output = "rdfs/output.ttl"
+g.serialize(destination=output, format="turtle")
+
+# Notify success
+print('Successful!')
+print('You can find the turtle file at: ' + output)
