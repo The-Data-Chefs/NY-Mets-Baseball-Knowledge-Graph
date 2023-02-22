@@ -28,9 +28,11 @@ pip install -r requirements.py
 python lahman_to_turtle.py
 ```
 
-# Usage 2: get text from wikipedia title. (eg. Barry_Bonds for https://en.wikipedia.org/wiki/Barry_Bonds )
+# Usage 2: get summary text from wikipedia of Mets players
 ```
-python from_wiki.py <wiki_title>
+python from_wiki.py 
+rm combined_wikitext.txt
+for f in wikitexts/*.txt; do (cat "${f}"; echo "\n";) >> combined_wikitext.txt; done
 ```
 
 # Data Source
